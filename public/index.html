@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
+    manifest.json provides metadata used when your web app is added to the
+    homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+  -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <!--
+    Notice the use of %PUBLIC_URL% in the tags above.
+    It will be replaced with the URL of the `public` folder during the build.
+    Only files inside the `public` folder can be referenced from the HTML.
+
+    Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+    work correctly both with client-side routing and a non-root public URL.
+    Learn how to configure a non-root public URL by running `npm run build`.
+  -->
+  <title>React App</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" media="all">
+</head>
+<body>
+  <html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style type="text/css">
+    .post {
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: auto;
+      margin: 0;
+      overflow: hidden;
+      padding-top: 100%;
+      position: relative;
+      transition: all 1.5s ease-out;
+    }
+    .shop-post:hover {
+      transform: scale(1.1);
+    }
+    .shop-post-wrapper {
+      overflow: hidden;
+    }
+    .post-img {
+      display: none;
+    }
+    .post-control {
+      background-color: rgba(255, 255, 255, 0.6);
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+    .instagram-control {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .hotspot {
+      background-color: #222;
+      border-radius: 50%;
+      color: #fff;
+      display: inline-block;
+      font-weight: 400;
+      position: absolute;
+      text-align: center;
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s ease-in-out;
+    }
+    .hotspot-md {
+      border: 2px solid #ddd;
+      font-size: 14px;
+      height: 28px;
+      line-height: 24px;
+      width: 28px;
+    }
+    .hotspot-md:hover {
+      background-color: #eee;
+      border-color: #222;
+      color: #222;
+    }
+    .hotspot-sm {
+      background-color: #fff;
+      color: #000;
+      font-size: 12px;
+      height: 21px;
+      line-height: 21px;
+      width: 21px;
+    }
+    .hotspot-sm:hover {
+      background-color: #222;
+      color: #eee;
+    }
+    .post-editor-hotspot {
+      transition: none;
+    }
+    .post-editor-hotspot:hover {
+      cursor: move;
+      cursor: grab;
+      cursor: -webkit-grab;
+      cursor: -moz-grab;
+    }
+  </style>
+</head>
+
+<body>
+  <main role="main" class="container my-5">
+    <div id="react-root"></div>
+    <div data-react-class="Components.MediaEditor" data-react-props='{"media":{"products":[{"y":"70.23001384037435","x":"45.97640545706189","url":"http://cool.com/beans","title":"Cool Beans","index":1,"id":"b6929ad0-217a-426b-bb12-e8bedeccf29b","delete":null,"urlLoader":false,"disableInput":false,"userTyping":false,"lastUserEdit":null}],"image_url":"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/21568478_115818752425985_3423494070587097088_n.jpg","id":70,"enable_hotspots":true,"caption":null},"form":{"method":"put","csrf_token":"Nj1zEwchSX0rUmwpHSp3LSIwHgA/EAAAsKKgnxxVBcYsHlFynr1thQ==","action":"/gapkids_br/catalog/70"}}' data-react-target-id="react-root"></div>
+
+    <dl>
+      <dt>Getting Started: 1</dt>
+      <dd>Fork this app (top bar, between the "Heart" icon and the "Save" link)</dd>
+      <dt>Spec 1: Async Requests Using Redux Thunk</dt>
+      <dd>When the user fills in the URL field, we should make an aync request to the inputed URL. You can mock this with the following JSON response: <code>{"price": "9.99", "title": "Some Cool Item", "image": "/some/path/to/image.jpg"}</code></dd>
+      <dt>Spec 2: Update Title Input</dt>
+      <dd>Set the <code>Title</code> input value to the <code>title</code> from the json respnse in Task 1.</dd>
+      <dt>Spec 3: Toggle <code>Title</code> Input</dt>
+      <dd>While async request is taking place, the <code>Title</code> input should be disabled until we get a response. Enabled it after you update its value as in Task 2.</dd>
+      <dt>Spec 4: Dispaly Spinner</dt>
+      <dd>While the async request is happening, display a spinner next to the <code>URL</code> field.</dd>
+    </dl>
+  </main>
+</body>
+</html>
+
+  <!--
+    This HTML file is a template.
+    If you open it directly in the browser, you will see an empty page.
+
+    You can add webfonts, meta tags, or analytics to this file.
+    The build step will place the bundled scripts into the <body> tag.
+
+    To begin the development, run `npm start` or `yarn start`.
+    To create a production bundle, use `npm run build` or `yarn build`.
+  -->
+</body>
+</html>
