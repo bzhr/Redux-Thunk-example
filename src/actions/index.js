@@ -63,11 +63,8 @@ function getEventLocation(event) {
   return { x, y };
 }
 
-export const backgroundFetch = (event, index) => dispatch => {
-  console.log("backgroundFetch");
-  dispatch(disableInput(event, index, true))
-  dispatch(fetchUrl(event, index))
-
+export const backgroundFetch = (dispatch, event, index) => {
+  console.log("backgroundFetch")
   return  fetch("http://59d647df2204e30011011a66.mockapi.io/url")
     .then(response => response.json())
     .then(json => onResponseReady(dispatch, event, index, json))
@@ -79,8 +76,8 @@ function onResponseReady(dispatch, event, index, json) {
   dispatch(disableInput(event, index, false))
 }
 
-function fetchUrl(event, index) {
-  return { type: FETCH_URL, url: event.target.value, index }
+function fetchUrl(index, bool) {
+  return { type: FETCH_URL, url: bool, index }
 }
 
 function responseReady(event, index) {
@@ -99,35 +96,65 @@ const userTyping = (bool, index) => {
   return { type: USER_TYPING, isEditing: bool, index }
 }
 
-export function shouldFetchUrl(event, index) {
-  return (dispatch, getState) => {
-    dispatch(userTyping(true, index))
-    const interval = setInterval(checkUntilFinished.bind(getState, event, index, dispatch), 300)
+export const shouldFetchUrl =
+    (event, index) => {
+      return (dispatch, getState) => {
+        const state = getState()
+        const isUserTyping = state.media.products[index].userTyping
+        if (!isUserTyping) {
+          dispatch(userTyping(true, index))
+          dispatch(disableInput(event, index, true))
+          dispatch(fetchUrl(index, true))
+          repeat(1000, () =>
+                  Promise.all([isFinishedTyping(getState, index)]))
+            .then(stopWhenFinishedTyping(dispatch, event, index))
+        }
+      }
+    }
+
+let intervalID = 0
+
+const wait =
+		ms => new Promise(
+  			r => setTimeout(r, ms)
+  	);
+
+const repeat =
+		(ms, func) => new Promise(
+    		r => (
+        		intervalID = setInterval(func, ms),
+            wait(ms).then(r)
+        )
+    );
+
+const myfunction =
+		() => new Promise(
+  			r => r(console.log('repeating...'))
+  	);
+
+  const isFinishedTyping = (getState, index) => {
     const state = getState()
-    if (!state.userTyping) {
-      clearInterval(interval)
+    const product = state.media.products[index]
+    if (Date.now() - product.lastUserEdit > 750 && product.userTyping) {
+      clearInterval(intervalID);
     }
   }
-}
+const stopWhenFinishedTyping =
+		(dispatch, event, index) => new Promise(
+  			r => r(setTimeout(
+        					() => {
+                  		clearInterval(intervalID);
+                      dispatch(userTyping(false, index))
+                      backgroundFetch(dispatch, event, index)
+                   } , 5000))
+  	);
 
 function checkUntilFinished(getState, event, index, dispatch) {
-  const finishedTyping = setTimeout(isFinishedTyping.bind(getState), 200)
-  // if (finishedTyping) {
-  //   clearInterval(isFinishedTyping)
-  // }
   const state = getState()
-  console.log("Interval Function", state.userTyping)
+  alert("Interval Function", (Date.now() - state.lastUserEdit > 750 && state.userTyping))
   if (Date.now() - state.lastUserEdit > 750 && state.userTyping) {
-    console.log("finishedTyping");
+    alert("finishedTyping");
     dispatch(backgroundFetch(event, index))
     dispatch(userTyping(false, index))
   }
 }
-
-// const isFinishedTyping = (getState) => {
-//
-//   console.log("isFinishedTyping lastUserEdit", state.lastUserEdit)
-//   if (Date.now() - state.lastUserEdit > 750 && state.userTyping) {
-//     return true
-//   }
-// }
